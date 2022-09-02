@@ -10,11 +10,13 @@ const loadData = async () => {
 const displayCategorories = async (categories) => {
     const categoriesData = await loadData(categories)
     // console.log(categoriesData)
+
     const categoriesContainer = document.getElementById('categories-container')
     categoriesData.forEach(category => {
         const categoryDiv = document.createElement('div')
         categoryDiv.innerHTML = `
         <button onclick = "loadCategoryData('${category.category_id}')" class="btn btn-outline-light"><a  class="text-decoration-none text-success fw-semibold" href="#all-news-container">${category.category_name}</a></button>
+        
         `;
         categoriesContainer.appendChild(categoryDiv)
     });
@@ -29,7 +31,12 @@ const loadCategoryData = async (categoryId) => {
 }
 
 const displayCategoryData = allNews => {
-    // console.log(allNews)
+   
+    // footer add
+    const footer = document.getElementById('footer')
+    footer.innerHTML = `<div class="text-center text-white-50 bg-black p-5">
+    <h6>Copyright 2021 News Factory</h6>
+</div>`
     const allNewsContainer = document.getElementById('all-news-container')
     allNewsContainer.textContent = '';
     allNews.forEach(news => {
