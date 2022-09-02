@@ -12,17 +12,33 @@
 <body>
     <header>
         <!-- navbar  -->
-        <nav class="navbar bg-light">
-            <div class="container-fluid">
-                <a class="navbar-brand fw-bold">News <span class="text-danger">Factory</span></a>
-                <div class="d-flex justify-content-around me-3 fw-semibold">
-                    <a class="nav-link active mx-3 " aria-current="page" href="#">News</a>
-                    <a class="nav-link" href="#">Blogs</a>
+        <nav class="navbar navbar-expand-lg bg-light">
+            <div class="container-fluid mx-sm-2 d-lg-flex justify-content-lg-between">
+                
+                <a class="navbar-brand fw-bold ">News <span class="text-danger">Factory</span></a>
+
+                <div class= "me-3 ">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <!-- news & blogs area  -->
+                    <div class="collapse navbar-collapse " id="navbarNavAltMarkup">
+                        <div class=" navbar-nav fw-semibold">
+                            <a class="nav-link mx-3 " aria-current="page" href="#">News</a>
+                            <a class="nav-link" href="#">Blogs</a>
+                        </div>
+                    </div>
                 </div>
+
             </div>
         </nav>
 
         <section class="container">
+            <div id="categories-container" class="d-md-flex justify-content-md-around my-md-3">
+                <!-- dynamicall add category items  -->
+            </div>
 
         </section>
     </header>
