@@ -31,19 +31,36 @@ const loadCategoryData = async (categoryId) => {
 }
 
 const displayCategoryData = allNews => {
-   
-    // footer add
-    const footer = document.getElementById('footer')
-    footer.innerHTML = `<div class="text-center text-white-50 bg-black p-5">
-    <h6>Copyright 2021 News Factory</h6>
-</div>`
+
     const allNewsContainer = document.getElementById('all-news-container')
-    allNewsContainer.textContent = '';
-    allNews.forEach(news => {
-        const { title, details, author, image_url } = news
-        const newsDiv = document.createElement('div')
-        newsDiv.classList.add('col')
-        newsDiv.innerHTML = `
+    const noData = document.getElementById('no-data');
+    const dataFound = document.getElementById('data-found')
+    const footer = document.getElementById('footer')
+
+
+
+    if (allNews.length === 0) {
+        noData.classList.remove('d-none')
+        dataFound.classList.add('d-none')
+        allNewsContainer.textContent = '';
+        footer.classList.add('d-none')
+    }
+    else {
+        dataFound.classList.remove('d-none')
+        dataFound.innerText = `${allNews.length} items found, please check below....`
+        noData.classList.add('d-none')
+
+        footer.innerHTML = `<div class="text-center text-white-50 bg-black p-5">
+                                <h6>Copyright 2021 News Factory</h6>
+                            </div>`;
+        footer.classList.remove('d-none')
+        allNewsContainer.textContent = '';
+
+        allNews.forEach(news => {
+            const { title, details, author, image_url } = news
+            const newsDiv = document.createElement('div')
+            newsDiv.classList.add('col')
+            newsDiv.innerHTML = `
         <div class="card mb-3">
             <div class="row g-0">
                 <div class="col-md-4">
@@ -59,8 +76,9 @@ const displayCategoryData = allNews => {
             </div>
         </div>
         `;
-        allNewsContainer.appendChild(newsDiv)
-    });
+            allNewsContainer.appendChild(newsDiv)
+        });
+    }
 }
 
 displayCategorories()
