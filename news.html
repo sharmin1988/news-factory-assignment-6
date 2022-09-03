@@ -45,23 +45,36 @@
 
     <main>
         <section class="container">
+            <!-- Display items number found / not -->
             <div class="text-center my-3 w-75 mx-auto">
-                <h6 id="no-data" class="my-md-5 py-3 bg-warning rounded-3 d-none">No data found!!! please check another category....</h6>
+                <h6 id="no-data" class="my-md-5 py-3 bg-warning rounded-3 d-none">No data found!!! please check another
+                    category....</h6>
                 <h6 id="data-found" class="p-3 bg-light rounded-3 d-none"></h6>
             </div>
 
-            <div id="all-news-container" class="row row-cols-1 mx-md-4 g-4">
+            <!-- spinner  -->
+            <div id="spinner" class="text-center my-5 py-5">
+                <div class="spinner-border text-danger" style="width: 3rem; height: 3rem;" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
 
+            <!-- dynamic All news container  -->
+            <div id="all-news-container" class="row row-cols-1 mx-md-4 g-4">
+                <!-- dynamic All news card  -->
             </div>
 
 
-           
-
- 
+            <!-- Modal -->
+            <div class="modal fade" id="newsModal" tabindex="-1" aria-labelledby="newsModalLabel" aria-hidden="true">
+                <div id="modal-container" class="modal-dialog">
+                    <!-- dynamic modal body -->
+                </div>
+            </div>
         </section>
     </main>
 
-    <footer id="footer" >
+    <footer id="footer">
     </footer>
 
     <!-- script files  -->

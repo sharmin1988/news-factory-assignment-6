@@ -47,14 +47,14 @@ const displayCategoryData = allNews => {
         dataFound.classList.remove('d-none')
         dataFound.innerText = `${allNews.length} items found, please check below....`
         allNewsContainer.textContent = '';
-        
+
         footer.innerHTML = `<div class="text-center text-white-50 bg-black p-5">
                                 <h6>Copyright 2021 News Factory</h6>
                             </div>`;
         footer.classList.remove('d-none')
 
         allNews.forEach(news => {
-            const { title, details, author, image_url, total_view } = news
+            const { title, details, author, image_url, total_view, _id } = news
             const newsDiv = document.createElement('div')
             newsDiv.classList.add('col')
             newsDiv.innerHTML = `
@@ -82,7 +82,7 @@ const displayCategoryData = allNews => {
                             <img src="image/carbon_view.png"  class="img-fluid" alt="">
                             <span class="fw-bold ms-1">${total_view ? total_view : 'N/A'}</span>
                         </div>
-                        <div class="btn btn-outline-light">
+                        <div onclick = "loadNewsDetails('${_id}')" class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#newsModal">
                             <img src="image/Group.png" alt="">
                         </div>
                     </div>
@@ -96,5 +96,41 @@ const displayCategoryData = allNews => {
         });
     }
 }
+
+const loadNewsDetails = async (newsId) => {
+    const url = `https://openapi.programming-hero.com/api/news/${newsId}`
+    const res = await fetch(url)
+    const data = await res.json()
+    displayModalNewsDetails(data.data[0])
+}
+const displayModalNewsDetails = modalNews => {
+    
+    // destructuring
+    const { image_url, author, rating, others_info } = modalNews
+
+    const modalContainer = document.getElementById('modal-container')
+    modalContainer.textContent = '';
+
+    const modalDiv = document.createElement('div')
+    modalDiv.classList.add('modal-content')
+    modalDiv.innerHTML = `
+    <div class="modal-header">
+        <h5 class="modal-title" id="newsModalLabel">More info..</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+        <img src="${image_url}" class="img-fluid" alt="">
+        <h6 class="mt-3">Rating: <span class = "text-danger">${rating ? rating.number : 'no-ratings'}</span> ${rating.badge}</h6>
+        <p class=" fw-semibold">Others info : ${others_info.is_trending ? 'Trending' : 'Not_trending'}</p>
+        <p class="my-0"><small>Author name : ${author.name ? author.name : 'N/A'}</small></p>
+        <p class="my-0"><small>Published date : ${author.published_date}</small></p>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+    </div>
+`;
+    modalContainer.appendChild(modalDiv)
+}
+
 
 displayCategorories()
