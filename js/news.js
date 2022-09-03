@@ -1,12 +1,18 @@
 
 const loadData = async () => {
     const url = `https://openapi.programming-hero.com/api/news/categories`
-    const res = await fetch(url)
-    const data = await res.json()
-    // console.log(data.data.news_category)
-    return data.data.news_category
+    try {
+        const res = await fetch(url)
+        const data = await res.json()
+        // console.log(data.data.news_category)
+        return data.data.news_category
+    }
+    catch (error) {
+        console.log(error)
+    }
 }
 
+// ------ display All categories ------
 const displayCategorories = async (categories) => {
     const categoriesData = await loadData(categories)
     // console.log(categoriesData)
@@ -21,13 +27,23 @@ const displayCategorories = async (categories) => {
     });
 };
 
+
+
+// ----- category data load & display Details Start ------------
 const loadCategoryData = async (categoryId) => {
+    // spinner call
     toggleSpinner(true)
-    // console.log(categoryId , 'hh')
+
     const url = `https://openapi.programming-hero.com/api/news/category/${categoryId}`
-    const res = await fetch(url)
-    const data = await res.json()
-    displayCategoryData(data.data)
+    try {
+        const res = await fetch(url)
+        const data = await res.json()
+        displayCategoryData(data.data);
+    }
+    catch (error) {
+        console.log(error)
+    }
+
 }
 
 const displayCategoryData = allNews => {
@@ -96,14 +112,25 @@ const displayCategoryData = allNews => {
             allNewsContainer.appendChild(newsDiv)
         });
     }
+    // spinner call
     toggleSpinner(false)
 }
+// ----- category data load & display Details end ------------
 
+
+
+
+//-------- Modal data load & display -----
 const loadNewsDetails = async (newsId) => {
     const url = `https://openapi.programming-hero.com/api/news/${newsId}`
-    const res = await fetch(url)
-    const data = await res.json()
-    displayModalNewsDetails(data.data[0])
+    try {
+        const res = await fetch(url)
+        const data = await res.json()
+        displayModalNewsDetails(data.data[0])
+    }
+    catch (error) {
+        console.log(error)
+    }
 }
 const displayModalNewsDetails = modalNews => {
 
