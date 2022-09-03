@@ -21,7 +21,7 @@ const displayCategorories = async (categories) => {
     categoriesData.forEach(category => {
         const categoryDiv = document.createElement('div')
         categoryDiv.innerHTML = `
-        <button onclick = "loadCategoryData('${category.category_id}')" class="btn btn-outline-light"><a  class="text-decoration-none text-success fw-semibold" href="#all-news-container">${category.category_name}</a></button>
+        <a onclick = "loadCategoryData('${category.category_id}')" class="btn btn-outline-light text-decoration-none text-success fw-semibold" href="#all-news-container">${category.category_name}</a>
         `;
         categoriesContainer.appendChild(categoryDiv)
     });
@@ -29,12 +29,11 @@ const displayCategorories = async (categories) => {
 
 
 
-// ----- category data load & display Details Start ------------
+// ----- category data load & display Details ------------
 const loadCategoryData = async (categoryId) => {
     
     //  call spinner
     toggleSpinner(true)
-
     const url = `https://openapi.programming-hero.com/api/news/category/${categoryId}`
     try {
         const res = await fetch(url)
@@ -48,24 +47,16 @@ const loadCategoryData = async (categoryId) => {
 }
 const displayCategoryData = allNews => {
     const allNewsContainer = document.getElementById('all-news-container');
-    // Clean blog content 
-    const blogContainer = document.getElementById('blog-container')
-    blogContainer.classList.add('d-none')
-    const itemsFound = document.getElementById('items-found')
-    itemsFound.classList.remove('d-none')
-
+   
     // how many items found / not founnd
     const noData = document.getElementById('no-data');
     const dataFound = document.getElementById('data-found')
-    // footer 
-    const footer = document.getElementById('footer')
 
     // check category empty or not 
     if (allNews.length === 0) {
         noData.classList.remove('d-none')
         dataFound.classList.add('d-none')
         allNewsContainer.textContent = '';
-        footer.classList.add('d-none')
     }
     else {
         noData.classList.add('d-none')
@@ -73,12 +64,12 @@ const displayCategoryData = allNews => {
         dataFound.innerText = `${allNews.length} items found, please check below....`
         allNewsContainer.textContent = '';
 
-        footer.innerHTML = `<div class="text-center text-white-50 bg-black p-5">
-                                <h6>Copyright 2021 News Factory</h6>
-                            </div>`;
-        footer.classList.remove('d-none')
+        allNews.sort((a, b) => {
+            return b.total_view - a.total_view;
+            })
 
-        // loop to get singel news
+            // console.log(allNews)
+
         allNews.forEach(news => {
             const { title, details, author, image_url, total_view, _id } = news
             const newsDiv = document.createElement('div')
@@ -106,7 +97,7 @@ const displayCategoryData = allNews => {
                         </div>
                         <div class="">
                             <img src="image/carbon_view.png"  class="img-fluid" alt="">
-                            <span class="fw-bold ms-1">${total_view ? total_view : 'N/A'}</span>
+                            <span class="fw-bold ms-1">${total_view ? total_view : 'N/A'}K</span>
                         </div>
                         <div onclick = "loadNewsDetails('${_id}')" class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#newsModal">
                             <img src="image/Group.png" alt="">
@@ -180,16 +171,6 @@ const toggleSpinner = isLoading => {
     }
 }
 
-// Load blogs items 
-const loadBlogs = () => {
-    const blogContainer = document.getElementById('blog-container')
-    blogContainer.classList.remove('d-none')
-
-    const allNewsContainer = document.getElementById('all-news-container')
-    allNewsContainer.textContent= ''
-    const itemsFound = document.getElementById('items-found')
-    itemsFound.classList.add('d-none')
-
-}
-
+// call the function to display defult
+loadCategoryData('01')
 displayCategorories()
