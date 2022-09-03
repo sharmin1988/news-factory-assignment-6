@@ -16,7 +16,6 @@ const displayCategorories = async (categories) => {
         const categoryDiv = document.createElement('div')
         categoryDiv.innerHTML = `
         <button onclick = "loadCategoryData('${category.category_id}')" class="btn btn-outline-light"><a  class="text-decoration-none text-success fw-semibold" href="#all-news-container">${category.category_name}</a></button>
-        
         `;
         categoriesContainer.appendChild(categoryDiv)
     });
@@ -37,8 +36,6 @@ const displayCategoryData = allNews => {
     const dataFound = document.getElementById('data-found')
     const footer = document.getElementById('footer')
 
-
-
     if (allNews.length === 0) {
         noData.classList.remove('d-none')
         dataFound.classList.add('d-none')
@@ -46,18 +43,18 @@ const displayCategoryData = allNews => {
         footer.classList.add('d-none')
     }
     else {
+        noData.classList.add('d-none')
         dataFound.classList.remove('d-none')
         dataFound.innerText = `${allNews.length} items found, please check below....`
-        noData.classList.add('d-none')
-
+        allNewsContainer.textContent = '';
+        
         footer.innerHTML = `<div class="text-center text-white-50 bg-black p-5">
                                 <h6>Copyright 2021 News Factory</h6>
                             </div>`;
         footer.classList.remove('d-none')
-        allNewsContainer.textContent = '';
 
         allNews.forEach(news => {
-            const { title, details, author, image_url } = news
+            const { title, details, author, image_url, total_view } = news
             const newsDiv = document.createElement('div')
             newsDiv.classList.add('col')
             newsDiv.innerHTML = `
@@ -70,7 +67,26 @@ const displayCategoryData = allNews => {
                     <div class="card-body">
                         <h5 class="card-title">${title}</h5>
                         <p class="card-text">Details : ${details.length > 200 ? details.slice(0, 200) + '...' : details} </p>
-                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+
+                        <div class="d-flex justify-content-around align-items-center">
+                        <div class="d-flex justify-content-between align-items-center gap-2">
+                            
+                            <img src="${author.img ? author.img : 'Not available'}" style="width: 40px; height: 40px;" class="rounded-circle img-fluid "  alt="">
+                            
+                            <div>
+                                <p class ="m-0  fw-semibold " >${author.name ? author.name : 'Not Available !!!'}</p>
+                                <p class ="m-0 text-muted fw-semibold">${author.published_date}</p>
+                            </div>
+                        </div>
+                        <div class="">
+                            <img src="image/carbon_view.png"  class="img-fluid" alt="">
+                            <span class="fw-bold ms-1">${total_view ? total_view : 'N/A'}</span>
+                        </div>
+                        <div class="btn btn-outline-light">
+                            <img src="image/Group.png" alt="">
+                        </div>
+                    </div>
+
                     </div>
                 </div>
             </div>
