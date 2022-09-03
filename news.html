@@ -27,7 +27,7 @@
                     <div class="collapse navbar-collapse " id="navbarNavAltMarkup">
                         <div class=" navbar-nav fw-semibold">
                             <a class="nav-link mx-3 " aria-current="page" href="#">News</a>
-                            <a class="nav-link" href="#">Blogs</a>
+                            <a onclick="loadBlogs()" class="nav-link" href="#blog-container">Blogs</a>
                         </div>
                     </div>
                 </div>
@@ -46,7 +46,7 @@
     <main>
         <section class="container">
             <!-- Display items number found / not -->
-            <div class="text-center my-3 w-75 mx-auto">
+            <div id="items-found" class="text-center my-3 w-75 mx-auto">
                 <h6 id="no-data" class="my-md-5 py-3 bg-warning rounded-3 d-none">No data found!!! please check another
                     category....</h6>
                 <h6 id="data-found" class="p-3 bg-light rounded-3 d-none"></h6>
@@ -59,9 +59,9 @@
                 </div>
             </div>
 
-            <!-- dynamic All news container  -->
+            <!---- All news container  -->
             <div id="all-news-container" class="row row-cols-1 mx-md-4 g-4">
-                <!-- dynamic All news card  -->
+                <!-- dynamic news card  -->
             </div>
 
 
@@ -72,6 +72,73 @@
                 </div>
             </div>
         </section>
+
+        <section class="container">
+            <!-- Blog questions  -->
+            <div id="blog-container" class="row row-cols-1 row-cols-lg-2 my-5 d-none">
+                <div class="col">
+                    <div class="card">
+                        <h5 class="card-title py-2 bg-success text-white text-center">Difference between var, let, const
+                            ?</h5>
+                        <div class="card-body">
+                            <p class="card-text">The scope of a <strong>var</strong> variable is functional scope.So it
+                                can be updated and re-declared into the scope. <br>
+                                On the other hand, The <strong>let</strong> variable is block scope.It can not be
+                                updated or re-declared outside the scope but can be update / modify inside the scope.
+                                <br>
+                                Finally The <strong>const</strong> variable is also block scope like let but It can not
+                                be updated or re-declared into the scope.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="card">
+                        <h5 class="card-title py-2 bg-danger text-white text-center">Difference between arrow and
+                            regular function ?</h5>
+                        <div class="card-body">
+                            <p class="card-text"><strong class="text-muted">1. Using 'new' keyword</strong>
+                                <br> <strong>Regular</strong> functions created using function declarations or
+                                expressions are constructible and callable.So they can be called using the "new"
+                                keyword.
+
+                                <br>
+                                However, the <strong>Arrow</strong> functions are only callable and not constructible.
+                                Hence, they can never be invoked with the "new" keyword.
+                            </p>
+                            <p class="card-text"><strong class="text-muted">2. Use of 'this' keyword</strong>
+                                <br>The behavior of 'this' inside of an <strong>arrow</strong> function differs
+                                considerably from the <strong>regular</strong> function's 'this' behavior. The arrow
+                                function doesn't define its own execution context.
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="card">
+                        <h5 class="card-title py-2 bg-info text-white text-center">Why use template string ?</h5>
+                        <div class="card-body">
+                            <p class="card-text">
+                                <strong>Template string</strong> also called Backticks (``) are an ES6 feature that
+                                allows us to create strings in JavaScript.
+                                <br>
+                                Although Template string are mostly used for HTML or code embedding purposes, they also
+                                act similar to single and double quotes. Besides, using Template string makes it easier
+                                for string operations such as....
+                            <ul>
+                                <li>1. Easy string concatenation</li>
+                                <li>2. Can write multiline without using the new line character</li>
+                            </ul>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
     </main>
 
     <footer id="footer">

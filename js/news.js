@@ -49,6 +49,11 @@ const loadCategoryData = async (categoryId) => {
 const displayCategoryData = allNews => {
 
     const allNewsContainer = document.getElementById('all-news-container')
+    const blogContainer = document.getElementById('blog-container')
+    blogContainer.classList.add('d-none')
+    const itemsFound = document.getElementById('items-found')
+    itemsFound.classList.remove('d-none')
+    
     const noData = document.getElementById('no-data');
     const dataFound = document.getElementById('data-found')
     const footer = document.getElementById('footer')
@@ -172,5 +177,15 @@ const toggleSpinner = isLoading => {
     }
 }
 
+// Load blogs 
+const loadBlogs = () => {
+    const allNewsContainer = document.getElementById('all-news-container')
+    const itemsFound = document.getElementById('items-found')
+    itemsFound.classList.add('d-none')
+    const blogContainer = document.getElementById('blog-container')
+    blogContainer.classList.remove('d-none')
+    allNewsContainer.textContent= ''
+
+}
 
 displayCategorories()
