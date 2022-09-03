@@ -22,6 +22,7 @@ const displayCategorories = async (categories) => {
 };
 
 const loadCategoryData = async (categoryId) => {
+    toggleSpinner(true)
     // console.log(categoryId , 'hh')
     const url = `https://openapi.programming-hero.com/api/news/category/${categoryId}`
     const res = await fetch(url)
@@ -95,6 +96,7 @@ const displayCategoryData = allNews => {
             allNewsContainer.appendChild(newsDiv)
         });
     }
+    toggleSpinner(false)
 }
 
 const loadNewsDetails = async (newsId) => {
@@ -104,7 +106,7 @@ const loadNewsDetails = async (newsId) => {
     displayModalNewsDetails(data.data[0])
 }
 const displayModalNewsDetails = modalNews => {
-    
+
     // destructuring
     const { image_url, author, rating, others_info } = modalNews
 
@@ -130,6 +132,17 @@ const displayModalNewsDetails = modalNews => {
     </div>
 `;
     modalContainer.appendChild(modalDiv)
+}
+
+//----- spinner loding -------
+const toggleSpinner = isLoading => {
+    const spinner = document.getElementById('spinner');
+    if (isLoading) {
+        spinner.classList.remove('d-none')
+    }
+    else {
+        spinner.classList.add('d-none')
+    }
 }
 
 
