@@ -31,7 +31,8 @@ const displayCategorories = async (categories) => {
 
 // ----- category data load & display Details Start ------------
 const loadCategoryData = async (categoryId) => {
-    // spinner call
+    
+    //  call spinner
     toggleSpinner(true)
 
     const url = `https://openapi.programming-hero.com/api/news/category/${categoryId}`
@@ -45,19 +46,21 @@ const loadCategoryData = async (categoryId) => {
     }
 
 }
-
 const displayCategoryData = allNews => {
-
-    const allNewsContainer = document.getElementById('all-news-container')
+    const allNewsContainer = document.getElementById('all-news-container');
+    // Clean blog content 
     const blogContainer = document.getElementById('blog-container')
     blogContainer.classList.add('d-none')
     const itemsFound = document.getElementById('items-found')
     itemsFound.classList.remove('d-none')
-    
+
+    // how many items found / not founnd
     const noData = document.getElementById('no-data');
     const dataFound = document.getElementById('data-found')
+    // footer 
     const footer = document.getElementById('footer')
 
+    // check category empty or not 
     if (allNews.length === 0) {
         noData.classList.remove('d-none')
         dataFound.classList.add('d-none')
@@ -75,6 +78,7 @@ const displayCategoryData = allNews => {
                             </div>`;
         footer.classList.remove('d-none')
 
+        // loop to get singel news
         allNews.forEach(news => {
             const { title, details, author, image_url, total_view, _id } = news
             const newsDiv = document.createElement('div')
@@ -117,11 +121,9 @@ const displayCategoryData = allNews => {
             allNewsContainer.appendChild(newsDiv)
         });
     }
-    // spinner call
+    //  stop spinner
     toggleSpinner(false)
 }
-// ----- category data load & display Details end ------------
-
 
 
 
@@ -140,7 +142,7 @@ const loadNewsDetails = async (newsId) => {
 const displayModalNewsDetails = modalNews => {
 
     // destructuring
-    const { image_url, author, rating, others_info } = modalNews
+    const { image_url, author, rating, others_info, title } = modalNews
 
     const modalContainer = document.getElementById('modal-container')
     modalContainer.textContent = '';
@@ -153,7 +155,8 @@ const displayModalNewsDetails = modalNews => {
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
     </div>
     <div class="modal-body">
-        <img src="${image_url}" class="img-fluid" alt="">
+        <img src="${image_url}" class="img-fluid mb-2" alt="">
+        <h4>${title}</h4>
         <h6 class="mt-3">Rating: <span class = "text-danger">${rating ? rating.number : 'no-ratings'}</span> ${rating.badge}</h6>
         <p class=" fw-semibold">Others info : ${others_info.is_trending ? 'Trending' : 'Not_trending'}</p>
         <p class="my-0"><small>Author name : ${author.name ? author.name : 'N/A'}</small></p>
@@ -177,14 +180,15 @@ const toggleSpinner = isLoading => {
     }
 }
 
-// Load blogs 
+// Load blogs items 
 const loadBlogs = () => {
-    const allNewsContainer = document.getElementById('all-news-container')
-    const itemsFound = document.getElementById('items-found')
-    itemsFound.classList.add('d-none')
     const blogContainer = document.getElementById('blog-container')
     blogContainer.classList.remove('d-none')
+
+    const allNewsContainer = document.getElementById('all-news-container')
     allNewsContainer.textContent= ''
+    const itemsFound = document.getElementById('items-found')
+    itemsFound.classList.add('d-none')
 
 }
 
